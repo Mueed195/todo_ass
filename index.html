@@ -1,0 +1,114 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo Application</title>
+
+
+	
+	<style>
+		
+.del_btn{
+	margin: 0 3px 0 50px;
+}
+.edit_btn{
+	margin: 0 3px;
+}
+.li{
+	margin-top:20px;
+}
+
+	</style>
+	
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">	
+</head>
+<body style="text-align:center">
+
+  <div  style="margin-top:5%">
+        <h1>Todo Application</h1>
+    </div>
+
+
+<div class="container"  style="margin-top:5%">
+     <div class="col-lg-12 col-md-12 col-sm-12">
+	   
+		   <input placeholder="What do you want to do?" type="text" id="todo-item" class="input form-control" style="display:inline; width:70%">
+		   <button onclick="addTodo()" type="button" class="btn btn-success">Add Item</button>
+		   <button onclick="deleteAll()" type="button" class="btn btn-danger">Delete All</button>		   
+		   <ul id="list"></ul> 
+      </div>
+</div>
+
+
+
+
+<script >
+
+	var list = document.getElementById("list");
+
+function addTodo(){
+	var todo_item = document.getElementById("todo-item");
+	
+	// Create li tag
+	var li = document.createElement('li');
+	var liText = document.createTextNode(todo_item.value);
+	li.setAttribute("class","li");
+	li.appendChild(liText)
+	
+	// Create delete btn
+	var delBtn = document.createElement("button")
+	var delText = document.createTextNode("Delete")
+	delBtn.setAttribute("class","del_btn btn btn-danger");
+	delBtn.setAttribute("onclick","deleteItem(this)");
+	delBtn.appendChild(delText)
+	li.appendChild(delBtn)
+	
+	// Create edit btn
+	var editBtn = document.createElement("button")
+	var editText = document.createTextNode("Edit")
+	editBtn.setAttribute("class","edit_btn btn btn-primary");
+	editBtn.setAttribute("onclick","editItem(this)");
+	editBtn.appendChild(editText)
+	li.appendChild(editBtn)
+	
+	list.appendChild(li)
+	
+	todo_item.value = "";
+	
+}
+
+
+function deleteItem(e){
+	e.parentNode.remove();
+}
+
+function editItem(e){
+	var editValue = prompt("Enter edit value", e.parentNode.firstChild.nodeValue);
+	editValue.setAttribute("class","prompt");
+	e.parentNode.firstChild.nodeValue = editValue;
+}
+
+
+function deleteAll(){
+	list.innerHTML = ""
+}
+
+
+
+</script>
+</body>
+</html>
